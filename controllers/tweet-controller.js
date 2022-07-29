@@ -19,8 +19,8 @@ const tweetController = {
   },
   postTweet: (req, res, next) => {
     // todo待處理flash
-    // if (!req.body.description) throw new Error('error_messages', '內容不可空白')
-    // if (req.body.description.trim().length === 0) throw new Error('error_messages', '請輸入推文內容!')
+    if (!req.body.description) throw new Error('error_messages', '內容不可空白')
+    if (req.body.description.trim().length === 0) throw new Error('error_messages', '請輸入推文內容!')
     // if (req.body.description.length > 140) throw new Error('error_messages', '推文超過140字數限制')
 
     // const userId = req.user.id
