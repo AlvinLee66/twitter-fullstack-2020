@@ -1,11 +1,12 @@
 const { User, Followship } = require('../models')
 const helpers = require('../_helpers')
+const FollowYourselfError = require('../helpers/error-helpers')
 
 const followshipController = {
   addFollowing: (req, res, next) => {
-    const followerId = (helpers.getUser(req) && helpers.getUser(req).id) || []
+    const followerId = Number(helpers.getUser(req) && helpers.getUser(req).id) || []
     const followingId = Number(req.params.userId)
-    if (followerId === followingId) throw new Error('Not allow to follow yourself!')
+    if (followerId === followingId) throw new FollowYourselfError('Not allow to follow self!')
     return Promise.all([
       User.findByPk(followerId),
       Followship.findOne({
@@ -23,8 +24,14 @@ const followshipController = {
           followingId
         })
       })
-      .then(createdFollowship => res.redirect('back'))
-      .catch(next)
+      .then(createdFollowship => res.redirect('/users/:id'))
+      .catch(err => {
+        if (err.name === FollowYourselfError) {
+          req.flash('error_messages', 'Not allow to follow self!')
+          return res.redirect('/')
+        }
+        next(err)
+      })
   },
   removeFollowing: (req, res, next) => {
     const followerId = (helpers.getUser(req) && helpers.getUser(req).id) || []
@@ -39,7 +46,7 @@ const followshipController = {
         if (!followship) throw new Error("You didn't follow this user!")
         return followship.destroy()
       })
-      .then(deletedFollowship => res.redirect('back'))
+      .then(deletedFollowship => res.redirect('/users/:id'))
       .catch(next)
   }
 }
