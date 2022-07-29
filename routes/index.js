@@ -15,7 +15,7 @@ router.post('/signin', passport.authenticate('local', { failureRedirect: '/signi
 router.get('/logout', userController.logout)
 
 // todo: 驗證
-router.get('/tweets', tweetController.getTweets)
+router.get('/tweets', authenticated, tweetController.getTweets)
 router.post('/tweets', tweetController.postTweet)
 
 router.get('/users/:id/setting', userController.getSetting)
@@ -23,7 +23,7 @@ router.get('/users', userController.getUsers)
 
 router.post('/followships/:userId', authenticated, followshipController.addFollowing)
 router.delete('/followships/:userId', authenticated, followshipController.removeFollowing)
-
+router.get('/', (req, res) => res.redirect('/tweets'))
 router.use('/', generalErrorHandler)
 
 module.exports = router
