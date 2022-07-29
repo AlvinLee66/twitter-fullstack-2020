@@ -57,8 +57,8 @@
           {{#each tweets}}
           <tr>
             <td>icon</td>
-            <td>使用者名稱{{user.name}}
-              <small>@帳號{{user.account}}．{{relativeTimeFromNow this.createdAt}}</small>
+            <td>{{this.User.name}}
+              <small>@{{this.User.account}}．{{relativeTimeFromNow this.createdAt}}</small>
               <p>{{this.description}}</p>
               <div>
                 <small>{{replies.length}}xx回應</small>

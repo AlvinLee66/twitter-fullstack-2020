@@ -5,6 +5,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
+        {{>messages}}
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <!-- Modal body -->
@@ -12,9 +13,9 @@
         <form action="/tweets" method="POST">
           <label for="description" class="form-label"></label>
           <textarea name="description" id="description" class="tweetTextarea"
-            style="width: 100%; height:100px; resize: none;" placeholder="有什麼新鮮事？" name="description" maxlength="140"
-            required></textarea>
+            style="width: 100%; height:100px; resize: none;" placeholder="有什麼新鮮事？" name="description"></textarea>
           <h4>
+            {{#if message}} {{message}} {{/if}}
             <button type="submit" class="badge rounded-pill text-bg-warning" style="border: none;">
               推文
             </button>
