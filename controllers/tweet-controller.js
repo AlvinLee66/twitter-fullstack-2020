@@ -10,7 +10,6 @@ const tweetController = {
       include: User
     })
       .then(tweets => {
-        console.log(tweets)
         const data = tweets.map(t => ({
           ...t,
           description: t.description.substring(0, 50)
