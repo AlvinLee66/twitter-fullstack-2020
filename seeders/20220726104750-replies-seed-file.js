@@ -18,15 +18,15 @@ module.exports = {
 
     const userRandomIndex = Math.floor(Math.random() * users.length)
     const tweetRandomIndex = Math.floor(Math.random() * tweets.length)
-    const userId = users[userRandomIndex].id
-    const tweetId = tweets[tweetRandomIndex].id
+    // const userId = users[userRandomIndex].id
+    // const tweetId = tweets[tweetRandomIndex].id
 
     await queryInterface.bulkInsert(
       'Replies',
-      Array.from({ length: 300 }, () => ({
+      Array.from({ length: 300 }).map((_, i) => ({
         comment: faker.lorem.sentence(),
-        user_id: userId,
-        tweet_id: tweetId,
+        user_id: (i % 10 + 1),
+        tweet_id: ~~(i / 3 + 1), // 商取整數
         created_at: new Date(),
         updated_at: new Date()
       }))

@@ -1,18 +1,18 @@
-const { Tweet, User } = require('../models')
+const { Tweet, User, Reply } = require('../models')
 const helpers = require('../_helpers')
 
 const tweetController = {
   getTweets: (req, res, next) => {
     return Tweet.findAll({
       order: [['createdAt', 'DESC']],
-      raw: true,
       nest: true,
-      include: User
+      include: [User, Reply]
     })
       .then(tweets => {
         const data = tweets.map(t => ({
-          ...t,
-          description: t.description.substring(0, 50)
+          ...t.dataValues,
+          description: t.description.substring(0, 50),
+          User: t.User.dataValues
         }))
         res.render('tweets', { tweets: data })
       })
