@@ -1,28 +1,27 @@
 'use strict'
 const faker = require('faker')
-const { User, Tweet } = require('models')
-
+const { User, Tweet } = require('../models')
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const users = await User.findAll({
-      attribute: ['id'],
-      where: { role: 'user' }
+    const usersIds = await User.findAll({
+      attributes: ['id'],
+      where: { role: 'user' },
+      raw: true
     })
-    const tweets = await Tweet.findAll({ attribute: ['id'] })
-    const userRandomIndex = Math.floor(Math.random() * users.length)
-    const tweetRandomIndex = Math.floor(Math.random() * tweets.length)
-    const userId = users[userRandomIndex].id
-    const tweetId = tweets[tweetRandomIndex].id
-    await queryInterface.bulkInsert('Reply', Array.from({ length: 300 }), () => ({
+    const tweetsIds = await Tweet.findAll({
+      attributes: ['id'],
+      raw: true
+    })
+    await queryInterface.bulkInsert('Replies', Array.from({ length: 300 }).map(() => ({
       comment: faker.lorem.sentence(),
-      userId,
-      tweetId,
+      userId: usersIds[Math.floor(Math.random() * usersIds.length)].id,
+      tweetId: tweetsIds[Math.floor(Math.random() * usersIds.length)].id,
       createdAt: new Date(),
       updatedAt: new Date()
-    }))
+    })))
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Reply', null, {})
+    await queryInterface.bulkDelete('Replies', null, {})
   }
 }

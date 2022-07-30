@@ -4,22 +4,22 @@
       <img src="https://i.imgur.com/RkfRCKR.png" alt="AC Logo" width="50px" height="50px">
     </div>
     <div class="headerContainer mt-3">
-      <h3 style="color:#1C1C1C; font-weight:700; font: size 28px; line: height 26px;">後台登入</h3>
+      <h3>後台登入</h3>
     </div>
     <div class="formContainer mt-3">
       <div class="row-md">
         <form class="form-floating" action="/admin/signin" method="POST">
           <div class="form-group">
-            <input type="email" class="form-control" id="account" name="account" placeholder="請輸入帳號" value="" required>
             <label for="account">帳號</label>
+            <input type="email" class="form-control" id="account" name="account" placeholder="請輸入帳號" value="" required>
           </div>
           <div class="form-group mt-2">
+            <label for="password">密碼</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="請輸入密碼" value=""
               required>
-            <label for="password">密碼</label>
           </div>
           <div class="buttonContainer mt-2">
-            <button class="btn" style="color:#FF6600" type="submit">登入</button>
+            <button class="btn" type="submit">登入</button>
           </div>
         </form>
       </div>
