@@ -9,12 +9,14 @@ const tweetController = {
       include: [User, Reply]
     })
       .then(tweets => {
+        const user = helpers.getUser(req)
         const data = tweets.map(t => ({
           ...t.dataValues,
           description: t.description.substring(0, 50),
-          User: t.User.dataValues
+          User: t.User.dataValues,
+          user
         }))
-        res.render('tweets', { tweets: data })
+        res.render('tweets', { tweets: data, user })
       })
       .catch(err => next(err))
   },
@@ -22,7 +24,7 @@ const tweetController = {
     const userId = helpers.getUser(req).id
     const description = req.body.description
 
-    // todo: 錯誤訊息顯示在model上面
+    // todo: 錯誤訊息顯示在modal上面
     if (!req.body.description) throw new Error('error_messages', '內容不可空白')
     if (req.body.description.trim().length === 0) throw new Error('error_messages', '請輸入推文內容!')
     if (req.body.description.length > 140) throw new Error('error_messages', '推文超過140字數限制')
