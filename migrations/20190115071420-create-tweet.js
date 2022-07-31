@@ -8,10 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-
-      user_id: {
-        type: Sequelize.INTEGER
-      },
       description: {
         type: Sequelize.TEXT
       },
@@ -24,11 +20,11 @@ module.exports = {
         type: Sequelize.DATE
       },
       user_id: {
+        allowNull: false,
         type: Sequelize.INTEGER
       }
     })
   },
-
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Tweets')
   }

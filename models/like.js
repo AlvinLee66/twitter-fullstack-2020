@@ -4,7 +4,10 @@ module.exports = (sequelize, DataTypes) => {
   class Like extends Model {
     static associate (models) {
       Like.belongsTo(models.User)
-      Like.belongsTo(models.Tweet)
+      Like.belongsTo(models.Tweet, {
+        foreignKey: 'tweetId',
+        as: 'LikedTweet'
+      })
     }
   };
   Like.init(
