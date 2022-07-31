@@ -88,6 +88,19 @@ textarea {
 
 .tweet-button {
   border: none;
+  width: 80px;
+  height: 40px;
+  color: #FFFFFF;
+  background: #FF6600;
+  border-radius: 50px;
 }
+
+#reply,
+#likes {
+  width: 25px;
+  height: 25px;
+  margin: 0px 5px;
+}
+
 
 /* modal樣式設定 */
