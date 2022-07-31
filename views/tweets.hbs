@@ -1,37 +1,7 @@
 <div class="wrapper d-flex">
 
   {{> modals}}
-
-  <!-- Sidebar -->
-  <nav id="left-sidebar">
-    <ul class="list-unstyled" id="list">
-      <img src="https://upload.cc/i1/2022/07/29/g7ZiA1.png" alt="ac-logo" id="ac-logo">
-      <li>
-        <h4><a href="/tweets"><img src="https://upload.cc/i1/2022/07/29/YZQVxJ.png" alt="index" class="icon"> 首頁</a>
-        </h4>
-      </li>
-      <li>
-        <h4><a href="/users/{{user.id}}"><img src="https://upload.cc/i1/2022/07/29/za0M5r.png" alt="index" class="icon">
-            個人資料</a></h4>
-      </li>
-      <li>
-        <h4><a href="/users/{{user.id}}/setting"><img src="https://upload.cc/i1/2022/07/29/AQiCy4.png" alt="index"
-              class="icon"> 設定</a></h4>
-      </li>
-      {{!-- todo: 跳出modal --}}
-      <li>
-        <h4>
-          <button type="button" class="badge rounded-pill text-bg-warning tweet-button" data-bs-toggle="modal"
-            data-bs-target="#myModal">
-            推文
-          </button>
-        </h4>
-      </li>
-      <li id="logout">
-        <h3><a href="/logout"><img src="https://upload.cc/i1/2022/07/29/i8J0Gd.png" alt="index" class="icon">登出</a>
-        </h3>
-      </li>
-  </nav>
+  {{>left-content}}
 
   <div class="container">
     <div>
