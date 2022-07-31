@@ -7,7 +7,7 @@
     <div>
       <h4 id="header"><a href="/tweets">首頁</a>
       </h4>
-      <div class="mb-3" id="post-tweet">
+      <div class="mb-3 post-tweet">
         <a href="/users/{{user.id}}"><img src="{{user.avatar}}" alt="avatar" id="avatar"></a>
         <p id="placeholder" data-bs-toggle="modal" data-bs-target="#myModal">有什麼新鮮事 ?</p>
         <form method="POST" action="/tweets" data-bs-toggle="modal" data-bs-target="#myModal">
@@ -33,7 +33,7 @@
                     src="https://upload.cc/i1/2022/07/29/Os3ojA.png" alt="
                   reply" id="reply">{{this.Replies.length}} 回應</small>
                 <small> <img src="https://upload.cc/i1/2022/07/29/15GUkZ.png" alt="likes"
-                    id="likes">{{this.Likes.length}} xx喜歡</small>
+                    id="likes">{{this.Likes.length}} 喜歡</small>
               </div>
             </td>
           </tr>

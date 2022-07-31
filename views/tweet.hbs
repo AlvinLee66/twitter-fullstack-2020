@@ -1,0 +1,55 @@
+<div class="wrapper d-flex">
+
+  {{> modals}}
+  {{>left-content}}
+
+  <div class="container">
+    <h4 id="header"><a href="/tweets">
+        <img class="ms-3" src="https://upload.cc/i1/2022/07/29/bYiz5s.png" alt=""
+          style="height: 30%; width: 4%; margin-right: 25px;">
+        推文</a>
+    </h4>
+    {{!-- 推文 --}}
+    <div class="px-2 post-tweet" id="tweet">
+      <a href="/users/{{tweet.User.id}}/tweets"><img src="https://upload.cc/i1/2022/07/29/CW8Hu0.png" alt="post-icon"
+          class="post-icon"></td>
+        {{tweet.User.name}}
+        <small>@{{tweet.User.account}}．{{relativeTimeFromNow tweet.createdAt}}</small>
+        <p class="description">{{tweet.description}}</p>
+        {{!-- 推文數據 --}}
+        <div class="d-flex mb-4">
+          <div style="margin-right: 20px;">
+            <span class="second"><a href="/users/{{targetUser.id}}/followings"
+                style="text-decoration:none;color: #171725"> {{replies.length}} 回覆</a></span>
+          </div>
+          <div>
+            <span class="second"><a href="/users/{{targetUser.id}}/followers"
+                style="text-decoration:none;color: #171725">{{likes.length}} 喜歡次數</a></span>
+          </div>
+        </div>
+    </div>
+    {{!-- 貼文的回覆 --}}
+    <table class="table">
+      <tbody>
+        {{#each replies}}
+        <tr class="post">
+          <td><a href="/users/{{this.User.id}}/tweets"><img src="https://upload.cc/i1/2022/07/29/CW8Hu0.png"
+                alt="post-icon" class="post-icon"></td>
+          <td>{{this.User.name}}
+            <small>@{{this.User.account}}．{{relativeTimeFromNow this.createdAt}}</small>
+            <p>回覆
+              {{!-- todo: 解bug --}}
+              <span>@ each內抓不到tweet資料{{tweet.User.account}}</span>
+            </p>
+            <p>{{this.comment}}</p>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+  </div>
+
+  {{>right-content}}
+
+</div>

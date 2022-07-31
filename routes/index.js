@@ -16,6 +16,7 @@ router.post('/signup', userController.signUp)
 
 router.get('/tweets', tweetController.getTweets)
 router.post('/tweets', tweetController.postTweet)
+router.get('/tweets/:id/replies', tweetController.getTweet)
 
 router.get('/users/:id/setting', authenticated, userController.getSetting)
 router.put('/users/:id/setting', authenticated, userController.putSetting)

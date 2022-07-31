@@ -74,7 +74,7 @@ a {
   left: 60px;
 }
 
-#post-tweet {
+.post-tweet {
   border-bottom: 8px solid rgb(209, 203, 203);
   position: relative;
   margin: 0px;
