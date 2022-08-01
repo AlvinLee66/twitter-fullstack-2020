@@ -27,7 +27,7 @@
                   alt="post-icon" class="post-icon"></td>
             <td>
               <a href="/tweets/{{this.id}}/replies" class="post-link">
-                {{this.User.name}}
+                <span>{{this.User.name}}</span>
                 <small>@{{this.User.account}}．{{relativeTimeFromNow this.createdAt}}</small>
                 <p>{{this.description}}</p>
               </a>

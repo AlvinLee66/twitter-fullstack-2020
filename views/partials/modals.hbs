@@ -29,7 +29,7 @@
 </div>
 
 {{!-- 查看單一貼文 --}}
-<div class="modal fade" id="replyModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="replyModal">
   <div class="modal-dialog">
     <div class="modal-content">
       <!-- Modal Header -->
@@ -37,24 +37,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <!-- Modal body -->
-      <div class="modal-body">
+      <div class="modal-body post-modal">
         {{!-- todo: 帶入對應資料 --}}
-        <form action="/tweets" method="POST">
-          <div class="btn-group me-0">
-            <div class="px-2" id="tweet">
-              <a href="/users/{{tweet.id}}/tweets"><img src="https://upload.cc/i1/2022/07/29/CW8Hu0.png" alt="post-icon"
-                  class="post-icon"></td>
-                {{tweets.User.name}}
-                <small>@{{tweet.User.account}}．{{relativeTimeFromNow tweet.createdAt}}</small>
-                <p class="description">{{tweet.description}}</p>
-            </div>
-            <h4>
-              <button type="submit" class="badge rounded-pill text-bg-warning tweet-button">
-                回覆
-              </button>
-            </h4>
-          </div>
-        </form>
       </div>
 
     </div>
