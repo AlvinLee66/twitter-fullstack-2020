@@ -34,11 +34,11 @@ postPanel.addEventListener('click', e => {
       `
 
   postModal.innerHTML = TweetInfo
-
-  // if (e.target.matches('.btn-show-reply')) {
-  //   console.log(e.target.dataset.id)
-  // }
 })
+
+// if (e.target.matches('.btn-show-reply')) {
+//   console.log(e.target.dataset.id)
+// }
 
 // wrapper.addEventListener('click', e => {()}
 // const tweet = document.getElementById('modal-description').value

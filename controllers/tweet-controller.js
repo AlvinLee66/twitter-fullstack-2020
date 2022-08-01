@@ -71,8 +71,19 @@ const tweetController = {
         res.render('tweet', { tweet: tweet, replies: data, likes })
       })
       .catch(err => next(err))
+  },
+  postReply: (req, res) => {
+    // if (req.body.reply.length > 140) {
+    //   return res.redirect('back')
+    // }
+    Reply.create({
+      userId: helpers.getUser(req).id,
+      TweetId: req.params.id,
+      comment: req.body.reply
+    }).then(reply => {
+      res.redirect('/tweets')
+    })
   }
-
 }
 
 module.exports = tweetController
