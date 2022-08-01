@@ -67,7 +67,6 @@ const tweetController = {
         const data = replies.map(r => ({
           ...r
         }))
-        console.log(data)
         res.render('tweet', { tweet: tweet, replies: data, likes })
       })
       .catch(err => next(err))
@@ -81,7 +80,7 @@ const tweetController = {
       TweetId: req.params.id,
       comment: req.body.reply
     }).then(reply => {
-      res.redirect('/tweets')
+      res.redirect(`/tweets/${req.params.id}/replies`)
     })
   }
 }

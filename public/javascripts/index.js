@@ -1,6 +1,8 @@
 const postPanel = document.querySelector('.table')
 const postModal = document.querySelector('.post-modal')
 
+// console.log(postPanel)
+
 // 特定貼文詳情
 postPanel.addEventListener('click', e => {
   // 取得貼文資料
@@ -9,6 +11,11 @@ postPanel.addEventListener('click', e => {
   const userName = post.children[0].textContent
   const userAccount = post.children[1].textContent
   const description = post.children[2].textContent
+
+  console.log(tweetId)
+  console.log(userName)
+  console.log(userAccount)
+  console.log(post.children[2].textContent)
 
   const TweetInfo =
     `
