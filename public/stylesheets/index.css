@@ -95,12 +95,15 @@ textarea {
   border-radius: 50px;
 }
 
+.post-link:hover {
+  color: rgb(83, 81, 81);
+}
+
+
+
 #reply,
 #likes {
   width: 25px;
   height: 25px;
   margin: 0px 5px;
 }
-
-
-/* modal樣式設定 */

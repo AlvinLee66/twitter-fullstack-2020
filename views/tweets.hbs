@@ -19,19 +19,22 @@
           </h4>
         </form>
       </div>
-      <table class="table">
+      <table class="table" id="postPanel">
         <tbody>
           {{#each tweets}}
           <tr class="post">
             <td><a href="/users/{{this.User.id}}/tweets"><img src="https://upload.cc/i1/2022/07/29/CW8Hu0.png"
                   alt="post-icon" class="post-icon"></td>
-            <td>{{this.User.name}}
-              <small>@{{this.User.account}}．{{relativeTimeFromNow this.createdAt}}</small>
-              <p>{{this.description}}</p>
+            <td>
+              <a href="/tweets/{{this.id}}/replies" class="post-link">
+                {{this.User.name}}
+                <small>@{{this.User.account}}．{{relativeTimeFromNow this.createdAt}}</small>
+                <p>{{this.description}}</p>
+              </a>
               <div>
-                <small data-bs-toggle="modal" data-bs-target="#replyModal"> <img
-                    src="https://upload.cc/i1/2022/07/29/Os3ojA.png" alt="
-                  reply" id="reply">{{this.Replies.length}} 回應</small>
+                <small> <img src="https://upload.cc/i1/2022/07/29/Os3ojA.png" alt="
+                  reply" id="reply" class="btn-show-reply" data-bs-toggle="modal" data-bs-target="#replyModal"
+                    data-id="{{this.id}}">{{this.Replies.length}} 回應</small>
                 <small> <img src="https://upload.cc/i1/2022/07/29/15GUkZ.png" alt="likes"
                     id="likes">{{this.Likes.length}} 喜歡</small>
               </div>
