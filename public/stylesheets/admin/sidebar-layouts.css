@@ -1,0 +1,94 @@
+.adminSidebarOptionsContainer {
+  float: left;
+  position: absolute;
+  width: 178px;
+  height: 1200px;
+  left: 130px;
+  top: 0px;
+}
+
+.adminAlphitterLogo {
+  position: absolute;
+  top: 13px;
+  bottom: 1147px;
+  left: 13px;
+  right: 125px;
+  width: 50px;
+  height: 50px;
+}
+
+.adminTweetsListLogo {
+  position: absolute;
+  top: 84.78px;
+  bottom: 1094.97px;
+  left: 16.9px;
+  right: 138.9px;
+  background: #FFFFFF;
+  width: 22.2px;
+  height: 20.25px;
+}
+
+.adminTweetsList {
+  position: absolute;
+  top: 82px;
+  bottom: 1092px;
+  left: 56px;
+  right: 50px;
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  color: #44444F;
+}
+
+.adminUsersListLogo {
+  position: absolute;
+  top: 150.66px;
+  bottom: 1029px;
+  left: 19.65px;
+  right: 141.65px;
+  background: #FFFFFF;
+  width: 16.7px;
+  height: 20.34px;
+}
+
+.adminUsersList {
+  position: absolute;
+  top: 148px;
+  bottom: 1026px;
+  left: 56px;
+  right: 32px;
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  color: #44444F;
+}
+
+.adminLogoutLogo {
+  position: absolute;
+  top: 1156px;
+  bottom: 20px;
+  left: 19px;
+  right: 141px;
+  width: 28px;
+  height: 28px;
+}
+
+.adminLogout {
+  position: absolute;
+  top: 1158px;
+  bottom: 16px;
+  left: 56px;
+  right: 86px;
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  color: #44444F;
+  width: 36px;
+  height: 26px;
+}

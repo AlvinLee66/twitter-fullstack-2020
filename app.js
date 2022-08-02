@@ -3,8 +3,10 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('./config/passport')
 const handlebars = require('express-handlebars')
+const handlebarsHelpers = require('./helpers/handlebars-helpers')
 const flash = require('connect-flash')
 const helpers = require('./_helpers')
+const bodyParser = require('body-parser')
 const routes = require('./routes')
 
 const app = express()
@@ -20,8 +22,12 @@ app.use(passport.session())
 
 app.use(methodOverride('_method'))
 
-app.engine('hbs', handlebars({ extname: '.hbs' }))
+app.engine('hbs', handlebars({ extname: '.hbs', helpers: handlebarsHelpers }))
 app.set('view engine', 'hbs')
+
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use(express.static('public'))
 
 app.use(flash())
 app.use((req, res, next) => {
