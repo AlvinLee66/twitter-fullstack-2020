@@ -14,6 +14,10 @@ module.exports = {
       followingId: {
         type: Sequelize.INTEGER
       },
+      isFollowed: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

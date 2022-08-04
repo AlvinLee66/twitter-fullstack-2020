@@ -77,7 +77,6 @@ const adminController = {
       nest: true
     })
       .then(users => {
-        console.log(users)
         return res.render('admin/users', {
           users,
           pagination: getPaginationAAdminUsers(limit, page, users.count)

@@ -5,7 +5,7 @@
   </div>
   {{#each tweets}}
   <div class="adminTweetContainer">
-    <a class="adminUserPageRoute" href="/users/{{this.User.id}}">
+    <a class="adminUserPageRoute">
       {{#if this.User.avatar}}
       <img class="adminUserProfilePic" src="{{this.User.avatar}}" style="transition: opacity 0.5s; opacity:0;"
         onload="this.style.opacity=1;" />

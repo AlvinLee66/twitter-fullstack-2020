@@ -7,7 +7,17 @@
   top: 0px;
 }
 
-.adminAlphitterLogo {
+#adminTweetsRoute {
+  position: absolute;
+  width: 172px;
+  height: 26px;
+  top: 84.78px;
+  bottom: 1092px;
+  left: 10px;
+  right: 50px;
+}
+
+#adminAlphitterLogo {
   position: absolute;
   top: 13px;
   bottom: 1147px;
@@ -17,22 +27,35 @@
   height: 50px;
 }
 
-.adminTweetsListLogo {
+#adminTweetsListLogo {
   position: absolute;
-  top: 84.78px;
+  top: 2.47px;
   bottom: 1094.97px;
-  left: 16.9px;
+  left: 1px;
   right: 138.9px;
   background: #FFFFFF;
-  width: 22.2px;
-  height: 20.25px;
+  width: 27.2px;
+  height: 25.25px;
+  visibility: visible;
 }
 
-.adminTweetsList {
+#adminTweetsListOrangeLogo {
   position: absolute;
-  top: 82px;
-  bottom: 1092px;
-  left: 56px;
+  top: 2.47px;
+  bottom: 1094.97px;
+  left: 1px;
+  right: 138.9px;
+  background: #FFFFFF;
+  width: 27.2px;
+  height: 25.25px;
+  visibility: hidden;
+}
+
+#adminTweetsList {
+  position: absolute;
+  top: 2.47px;
+  bottom: 1094.97px;
+  left: 45px;
   right: 50px;
   font-family: 'Noto Sans TC';
   font-style: normal;
@@ -42,22 +65,45 @@
   color: #44444F;
 }
 
-.adminUsersListLogo {
+#adminUsersRoute {
   position: absolute;
-  top: 150.66px;
+  width: 172px;
+  height: 26px;
+  top: 148px;
+  bottom: 1026px;
+  left: 10px;
+  right: 56px;
+}
+
+#adminUsersListLogo {
+  position: absolute;
+  top: 2.66px;
   bottom: 1029px;
-  left: 19.65px;
+  left: 5px;
   right: 141.65px;
   background: #FFFFFF;
   width: 16.7px;
   height: 20.34px;
+  visibility: visible;
 }
 
-.adminUsersList {
+#adminUsersListOrangeLogo {
   position: absolute;
-  top: 148px;
-  bottom: 1026px;
-  left: 56px;
+  top: 2.66px;
+  bottom: 1029px;
+  left: 5px;
+  right: 141.65px;
+  background: #FFFFFF;
+  width: 16.7px;
+  height: 20.34px;
+  visibility: hidden
+}
+
+#adminUsersList {
+  position: absolute;
+  top: 0.66px;
+  bottom: 1029px;
+  left: 45px;
   right: 32px;
   font-family: 'Noto Sans TC';
   font-style: normal;
@@ -67,7 +113,7 @@
   color: #44444F;
 }
 
-.adminLogoutLogo {
+#adminLogoutLogo {
   position: absolute;
   top: 1156px;
   bottom: 20px;
@@ -77,7 +123,7 @@
   height: 28px;
 }
 
-.adminLogout {
+#adminLogout {
   position: absolute;
   top: 1158px;
   bottom: 16px;
@@ -91,4 +137,8 @@
   color: #44444F;
   width: 36px;
   height: 26px;
+}
+
+.active {
+  color: #FF6600;
 }
