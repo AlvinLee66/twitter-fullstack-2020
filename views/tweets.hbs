@@ -1,0 +1,66 @@
+<div class="wrapper d-flex">
+
+  {{> modals}}
+  {{>left-content}}
+
+  <div class="container">
+    <div>
+      <h4 id="header"><a href="/tweets">首頁</a>
+      </h4>
+      <div class="mb-3 post-tweet">
+        <a href="/users/{{this.User.id}}/tweets"><img src="{{this.User.avatar}}" alt="avatar" class="avatar"></a>
+        <p id="placeholder" data-bs-toggle="modal" data-bs-target="#myModal">有什麼新鮮事 ?</p>
+        <form method="POST" action="/tweets" data-bs-toggle="modal" data-bs-target="#myModal">
+          <textarea name="description" id="description" class="tweetTextarea" disabled></textarea>
+          <h4>
+            <button type="button" class="badge rounded-pill text-bg-warning tweet-button post-tweet-button">
+              推文
+            </button>
+          </h4>
+        </form>
+      </div>
+      <table class="table" id="postPanel">
+        <tbody>
+          {{#each tweets}}
+          <tr class="post">
+            <td><a href="/users/{{this.id}}/tweets"><img src="{{this.User.avatar}}" alt="post-icon" class="post-avatar">
+            </td>
+            <td>
+              <a href="/tweets/{{this.id}}/replies" class="post-link">
+                <span>{{this.User.name}}</span>
+                <small>@{{this.User.account}}．{{relativeTimeFromNow this.createdAt}}</small>
+                <p>{{this.description}}</p>
+              </a>
+              <div>
+                <small> <img src="https://upload.cc/i1/2022/07/29/Os3ojA.png" alt="
+                  reply" id="reply" class="btn-show-reply" data-bs-toggle="modal" data-bs-target="#replyModal"
+                    data-id="{{this.id}}">{{this.Replies.length}} 回應</small>
+                <small>
+                  {{#if isLiked}}
+                  <form action="/tweets/{{this.id}}/unlike" method="POST" class="likes unlike">
+                    <button type="submit" class="likes">
+                      <img src="https://upload.cc/i1/2022/07/29/CaJuOl.png" alt="likes" id="likes" class="unlike">
+                    </button>
+                  </form>
+                  {{else}}
+                  <form action="/tweets/{{this.id}}/like" method="POST" class="likes">
+                    <button type="submit" class="likes">
+                      <img src="https://upload.cc/i1/2022/07/29/15GUkZ.png" alt="likes" id="likes">
+                    </button>
+                  </form>
+                  {{/if}}
+
+                  {{this.Likes.length}}
+                  喜歡
+                </small>
+              </div>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  {{>right-content}}
+</div>
