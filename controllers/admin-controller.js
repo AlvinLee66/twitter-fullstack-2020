@@ -20,7 +20,7 @@ const adminController = {
     const page = Number(req.query.page) || 1
     const limit = Number(req.query.limit) || DEFAULT_LIMIT
     const offset = getOffsetAdminTweets(limit, page)
-    Tweet.findAll({
+    return Tweet.findAll({
       order: [['createdAt', 'DESC']],
       attributes: [
         'id', 'createdAt',
@@ -58,7 +58,7 @@ const adminController = {
     const page = Number(req.query.page) || 1
     const limit = Number(req.query.limit) || DEFAULT_LIMIT
     const offset = getOffsetAdminUsers(limit, page)
-    User.findAll({
+    return User.findAll({
       where: { role: 'user' },
       attributes: {
         include: [
