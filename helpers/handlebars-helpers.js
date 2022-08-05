@@ -7,7 +7,7 @@ dayjs.locale(zhTw)
 
 module.exports = {
   currentYear: () => dayjs().year(),
-  relativeTimeFromNow: a => dayjs(a).locale(zhTw).fromNow(),
+  relativeTimeFromNow: a => dayjs(a).locale(zhTw).fromNow(12),
   ifCond: function (a, b, options) {
     return a === b ? options.fn(this) : options.inverse(this)
   }
