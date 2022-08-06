@@ -17,7 +17,7 @@ module.exports = {
     users.forEach(user => {
       likeList.push({
         userId: user.id,
-        tweetId: tweets.rows[Math.floor(Math.random() * tweets.count)].id,
+        tweetId: tweets.rows[~~(Math.random() * tweets.count)].id,
         createdAt: new Date(),
         updatedAt: new Date()
       })

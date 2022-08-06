@@ -17,7 +17,7 @@ module.exports = {
       const newList = userIdList.filter(id => id !== userId)
       const data = {}
       data.followerId = userId
-      data.followingId = newList[Math.floor(Math.random() * newList.length)]
+      data.followingId = newList[~~(Math.random() * newList.length)]
       data.createdAt = new Date()
       data.updatedAt = new Date()
       followships.push(data)

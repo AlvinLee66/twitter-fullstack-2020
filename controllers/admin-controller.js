@@ -24,7 +24,7 @@ const adminController = {
       order: [['createdAt', 'DESC']],
       attributes: [
         'id', 'createdAt',
-        [sequelize.literal('substring(description,1,200)'), 'description']
+        [sequelize.literal('substring(description,1,100)'), 'description']
       ],
       include: [{
         model: User,
@@ -60,14 +60,12 @@ const adminController = {
     const offset = getOffsetAdminUsers(limit, page)
     return User.findAll({
       where: { role: 'user' },
-      attributes: {
-        include: [
-          [sequelize.literal('(SELECT COUNT(*) from tweets AS tweet WHERE tweet.userId = user.id)'), 'tweetsCount'],
-          [sequelize.literal('(SELECT COUNT(*) from likes WHERE likes.userId = user.id)'), 'likesCount'],
-          [sequelize.literal('(SELECT COUNT(*) from followships AS followship WHERE followship.followingId = user.id)'), 'followingsCount'],
-          [sequelize.literal('(SELECT COUNT(*) from followships AS followship WHERE followship.followerId = user.id)'), 'followersCount']
-        ]
-      },
+      attributes: ['name', 'account', 'avatar', 'banner',
+        [sequelize.literal('(SELECT COUNT(*) from Tweets WHERE Tweets.userId = User.id)'), 'tweetsCount'],
+        [sequelize.literal('(SELECT COUNT(*) from Likes WHERE Likes.userId = User.id)'), 'likesCount'],
+        [sequelize.literal('(SELECT COUNT(*) from Followships WHERE Followships.followingId = User.id)'), 'followingsCount'],
+        [sequelize.literal('(SELECT COUNT(*) from Followships WHERE Followships.followerId = User.id)'), 'followersCount']
+      ],
       order: [
         [sequelize.literal('tweetsCount'), 'DESC']
       ],
@@ -77,7 +75,6 @@ const adminController = {
       nest: true
     })
       .then(users => {
-        console.log(users)
         return res.render('admin/users', {
           users,
           pagination: getPaginationAAdminUsers(limit, page, users.count)
@@ -86,5 +83,4 @@ const adminController = {
       .catch(next)
   }
 }
-
 module.exports = adminController

@@ -6,6 +6,7 @@ const followshipController = {
   addFollowing: (req, res, next) => {
     const followerId = (helpers.getUser(req) && helpers.getUser(req).id) || []
     const followingId = Number(req.params.userId)
+    console.log(followerId)
     console.log(followingId)
     if (followerId === followingId) throw new FollowYourselfError('Not allow to follow self!')
     return Promise.all([

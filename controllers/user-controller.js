@@ -34,7 +34,7 @@ const userController = {
     }
 
     if (name.length > 50) {
-      errors.push({ message: '名稱上限為50字！' })
+      errors.push({ message: '名稱上限為50字!' })
     }
 
     return Promise.all([
@@ -93,7 +93,7 @@ const userController = {
         include: User,
         group: 'followingId',
         attributes: {
-          include: [[sequelize.fn('COUNT', sequelize.col('following_id')), 'count']]
+          include: [[sequelize.fn('COUNT', sequelize.col('followingId')), 'count']]
         },
         order: [[sequelize.literal('count'), 'DESC']]
       })
@@ -146,7 +146,7 @@ const userController = {
         include: User,
         group: 'followingId',
         attributes: {
-          include: [[sequelize.fn('COUNT', sequelize.col('following_id')), 'count']]
+          include: [[sequelize.fn('COUNT', sequelize.col('followingId')), 'count']]
         },
         order: [[sequelize.literal('count'), 'DESC']]
       })
@@ -194,7 +194,7 @@ const userController = {
         include: User,
         group: 'followingId',
         attributes: {
-          include: [[sequelize.fn('COUNT', sequelize.col('following_id')), 'count']]
+          include: [[sequelize.fn('COUNT', sequelize.col('followingId')), 'count']]
         },
         order: [[sequelize.literal('count'), 'DESC']]
       })
@@ -358,7 +358,7 @@ const userController = {
         include: User,
         group: 'followingId',
         attributes: {
-          include: [[sequelize.fn('COUNT', sequelize.col('following_id')), 'count']]
+          include: [[sequelize.fn('COUNT', sequelize.col('followingId')), 'count']]
         },
         order: [[sequelize.literal('count'), 'DESC']]
       })
@@ -400,7 +400,7 @@ const userController = {
         include: User,
         group: 'followingId',
         attributes: {
-          include: [[sequelize.fn('COUNT', sequelize.col('following_id')), 'count']]
+          include: [[sequelize.fn('COUNT', sequelize.col('followingId')), 'count']]
         },
         order: [[sequelize.literal('count'), 'DESC']]
       })
