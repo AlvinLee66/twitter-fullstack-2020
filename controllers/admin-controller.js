@@ -7,11 +7,11 @@ const adminController = {
     res.render('admin/signin')
   },
   signIn: (req, res) => {
-    req.flash('success_messages', 'login successfully!')
+    req.flash('success_messages', '成功登入!')
     res.redirect('/admin/tweets')
   },
   logout: (req, res) => {
-    req.flash('success_messages', 'logout successfully!')
+    req.flash('success_messages', '成功登出!')
     req.logout()
     res.redirect('/admin/signin')
   },
@@ -24,7 +24,7 @@ const adminController = {
       order: [['createdAt', 'DESC']],
       attributes: [
         'id', 'createdAt',
-        [sequelize.literal('substring(description,1,100)'), 'description']
+        [sequelize.literal('substring(description,1,50)'), 'description']
       ],
       include: [{
         model: User,
