@@ -54,8 +54,7 @@ const tweetController = {
       userId,
       description
     })
-      .then(tweets => {
-        console.log(tweets)
+      .then(() => {
         req.flash('success_messages', '成功發布推文')
         res.redirect('/tweets')
       })

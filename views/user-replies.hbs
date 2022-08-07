@@ -1,5 +1,4 @@
 <div class="wrapper d-flex bg-white">
-  {{>modals}}
   {{>profile-modals}}
   {{>left-content-profile}}
 
@@ -8,7 +7,7 @@
     <div class="d-flex mt-1 mb-3" style="height: 60px;">
       <div class="d-flex" style="align-items: center; margin-right: 30px;">
         <a href="javascript:history.back()" style="text-decoration:none;">
-          <img class="ms-3" src="https://upload.cc/i1/2022/07/29/bYiz5s.png" alt="" style="height: 16px; width: 24px;">
+          <img class="ms-3" src="/images/leftButton.png" alt="" style="height: 16px; width: 24px;">
         </a>
       </div>
       <div>
@@ -65,9 +64,9 @@
                       style="width:632px; margin-left:-20px; height: 200px;margin-top:-20px ;position:relative">
                     <label class="form-label" for="banner">
                       <img style="position: absolute;left:270px; top:80px; z-index:3;width:35px;filter: invert(1);"
-                        src="https://upload.cc/i1/2022/07/29/PzDhp3.png" alt="upload">
+                        src="/images/uploadPhoto.png" alt="upload">
                       <img style="position: absolute;left:310px; top:85px; z-index:3;width:28px;filter: invert(1);"
-                        src="https://upload.cc/i1/2022/07/29/akXpZm.png" alt="">
+                        src="/images/x.png" alt="x">
                     </label>
                     <input class="form-control" type="file" class="form-control-file" id="banner" name="banner"
                       style="display: none;">
@@ -79,28 +78,31 @@
                       style="border: 4px solid white; height: 150px; width: 150px; margin-top: -110px; border-radius: 50%; position: relative;">
                     <label class="form-label" for="avatar">
                       <img style="position: absolute;left:77px; top:175px; z-index:3;width:35px; filter: invert(1);"
-                        src="https://upload.cc/i1/2022/07/29/PzDhp3.png" alt="upload">
+                        src="/images/uploadPhoto.png" alt="upload">
                     </label>
                     <input class="form-control" type="file" class="form-control-file" id="avatar" name="avatar"
                       style="display: none;">
                   </div>
 
                   {{!-- 名稱 --}}
-                  <div class="form-row">
-                    <label class="form-label" for="name" style="color: #696974;">名稱</label>
-                    <input class="form-control login-input" type="text" name="name" id="textname"
-                      onkeyup="validateName()" placeholder="Enter name" value="{{ targetUser.name }}" maxlength="50"
-                      required>
+                  <div class="form-row mt-2" style="background: #F5F8FA;">
+                    <label for="name" style="margin:0; padding-left:15px;">名稱</label>
+                    <input type="text" name="name" id="textname" onkeyup="validateName()"
+                      class="form-control font-weight-bold" placeholder="名稱" maxlength="50"
+                      value="{{ targetUser.name }}"
+                      style="background: #F5F8FA; border: 0; border-bottom: 2px solid #657786; border-radius:0;"
+                      id="name" required autofocus>
                   </div>
                   <p class="text-end" id="namecount" style="color: #696974;">
                     <span id="textnamecount" style="color: #696974;">{{ targetUser.name.length }}</span> /50
                   </p>
 
                   {{!-- 自我介紹 --}}
-                  <div class="form-row">
-                    <label class="form-label" for="introduction" style="margin:0; color: #696974;">自我介紹</label>
+                  <div class="form-row" style="background: #F5F8FA;">
+                    <label class="form-label" for="introduction" style="margin:0;padding-left:15px;">自我介紹</label>
                     <textarea class="form-control login-input" name="introduction" id="introduction" row="5"
-                      onkeyup="validate()" maxlength="160" placeholder="輸入自介">{{ targetUser.introduction }}</textarea>
+                      onkeyup="validate()" maxlength="160" placeholder="輸入自介"
+                      style="background: #F5F8FA; border: 0; border-bottom: 2px solid #657786; border-radius:0;">{{ targetUser.introduction }}</textarea>
                   </div>
                   <p class="text-end" id="count" style="margin:0; color: #696974;">
                     <span id="textcount" style="color: #696974;">{{ targetUser.introduction.length }}</span> /160
@@ -121,7 +123,7 @@
         {{else}}
         <div class="d-flex align-items-end">
           <form action="/followships" method="POST">
-            <button type="submit" class="btn rounded-pill" name="id"
+            <button type="submit" class="btn rounded-pill" name="id" value={{targetUser.id}}
               style=" background-color: #FFFFFF;color: #FF6600;border:1px solid #FF6600;">
               跟隨
             </button>
