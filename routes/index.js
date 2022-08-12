@@ -10,6 +10,7 @@ const userController = require('../controllers/user-controller')
 const followshipController = require('../controllers/followship-controller')
 const tweetController = require('../controllers/tweet-controller')
 const apiController = require('../controllers/api-controller')
+const chatController = require('../controllers/chat-controller')
 
 // 管理者
 router.use('/admin', admin)
@@ -48,6 +49,9 @@ router.post('/api/users/:id', authenticated, apiController.putUser)
 // 跟隨功能
 router.post('/followships', authenticated, followshipController.addFollowing)
 router.delete('/followships/:id', authenticated, followshipController.removeFollowing)
+
+// chatroom
+router.get('/chatroom/public', authenticated, chatController.getPublicChatroom)
 
 router.use('/', (req, res) => res.redirect('/tweets'))
 router.use('/', generalErrorHandler)

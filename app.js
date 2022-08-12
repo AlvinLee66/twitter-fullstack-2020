@@ -14,6 +14,11 @@ const path = require('path')
 
 const app = express()
 const port = process.env.PORT || 3000
+const http = require('http')
+const server = http.createServer(app)
+const { Server } = require('socket.io')
+const io = new Server(server)
+
 const SESSION_SECRET = 'secret'
 
 app.engine('hbs', handlebars({ extname: '.hbs', helpers: handlebarsHelpers }))
@@ -40,6 +45,15 @@ app.use((req, res, next) => {
 })
 
 app.use(routes)
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+io.on('connection', socket => {
+  // 顯示訊息
+  socket.on('chat message', msg => {
+    io.emit('chat message', msg)
+    io.send('chat message', msg)
+  })
+})
+
+server.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 module.exports = app
