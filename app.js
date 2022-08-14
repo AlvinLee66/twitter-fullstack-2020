@@ -19,8 +19,8 @@ const http = require('http')
 const server = http.createServer(app)
 const { Server } = require('socket.io')
 const io = new Server(server)
-
 const SESSION_SECRET = 'secret'
+const sessionMiddleware = session({ secret: SESSION_SECRET, resave: false, saveUninitialized: false })
 
 app.engine('hbs', handlebars({ extname: '.hbs', helpers: handlebarsHelpers }))
 app.set('view engine', 'hbs')
@@ -28,7 +28,7 @@ app.set('view engine', 'hbs')
 app.use(express.static('public'))
 
 app.use(express.urlencoded({ extended: true }))
-app.use(session({ secret: SESSION_SECRET, resave: false, saveUninitialized: false }))
+app.use(sessionMiddleware)
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -47,7 +47,43 @@ app.use((req, res, next) => {
 
 app.use(routes)
 
+// 引入midddleware
+const wrap = middleware => (socket, next) => middleware(socket.request, {}, next)
+
+// 包入session和passport (所以可以拿到使用者資料)
+io.use(wrap(sessionMiddleware))
+io.use(wrap(passport.initialize()))
+io.use(wrap(passport.session()))
+
+io.use((socket, next) => {
+  if (socket.request.user) {
+    next()
+  } else {
+    next(new Error('unauthorized'))
+  }
+})
+
+const userlist = []
+
 io.on('connection', socket => {
+  const user = socket.request.user
+
+  const index = userlist.findIndex(u => u.userId === user.id)
+
+  if (index === -1) {
+    userlist.push({
+      socketId: socket.id,
+      userId: user.id,
+      username: user.name,
+      account: user.account,
+      avatar: user.avatar
+    })
+  }
+  console.log(userlist)
+  io.emit('onlineUsers', userlist)
+
+  console.log(userlist)
+
   // welcome
   socket.emit('message', formatMessage('system', 'welcome to public chatroom'))
 

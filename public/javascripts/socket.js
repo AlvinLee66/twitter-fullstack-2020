@@ -2,6 +2,7 @@ const socket = io()
 
 const chatForm = document.getElementById('chat-form')
 const chatMessages = document.querySelector('.chat-messages')
+const userList = document.getElementById('users')
 
 // message from server
 socket.on('message', message => {
@@ -10,6 +11,11 @@ socket.on('message', message => {
   // scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight
 })
+
+// userlist from server
+socket.on('onlineUsers', user =>
+  outputUsers(user)
+)
 
 chatForm.addEventListener('submit', e => {
   e.preventDefault()
@@ -32,4 +38,9 @@ function outputMessage (message) {
         ${message.text}
       </p>`
   document.querySelector('.chat-messages').appendChild(div)
+}
+
+// add users to DOM
+function outputUsers (users) {
+  userList.innerHTML = ` ${users.map(user => `<li>${user.username}<small>@${user.account}</small></li>`).join('')}`
 }
