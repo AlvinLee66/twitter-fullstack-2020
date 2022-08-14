@@ -11,6 +11,7 @@ const helpers = require('./_helpers')
 const handlebarsHelpers = require('./helpers/handlebars-helpers')
 const routes = require('./routes')
 const path = require('path')
+const formatMessage = require('./utils/messages.js')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -47,17 +48,20 @@ app.use((req, res, next) => {
 app.use(routes)
 
 io.on('connection', socket => {
-  // 歡迎語
-  socket.emit('public message', 'welcome to public chatroom')
-  // 傳送訊息給所有人
-  socket.on('public message', msg => {
-    io.emit('public message', msg)
-  })
-  // 傳送訊息給除了自己以外的人!!
-  socket.broadcast.emit('public message', 'A user has joined the chat')
-  // say goodbye to the other
+  // welcome
+  socket.emit('message', formatMessage('system', 'welcome to public chatroom'))
+
+  // broadcast when a user connects
+  socket.broadcast.emit('message', formatMessage('system', 'A user has joined the chat'))
+
+  // runs when client disconnects
   socket.on('disconnect', () => {
-    io.emit('public message', 'a user has left the chat')
+    io.emit('message', formatMessage('system', 'A user has left the chat'))
+  })
+
+  // listen for chatMessage
+  socket.on('chatMessage', msg => {
+    io.emit('message', formatMessage('USER', msg))
   })
 })
 

@@ -1,20 +1,35 @@
 const socket = io()
 
-const messages = document.getElementById('messages')
-const form = document.getElementById('form')
-const input = document.getElementById('input')
+const chatForm = document.getElementById('chat-form')
+const chatMessages = document.querySelector('.chat-messages')
 
-form.addEventListener('submit', function (e) {
+// message from server
+socket.on('message', message => {
+  outputMessage(message)
+
+  // scroll down
+  chatMessages.scrollTop = chatMessages.scrollHeight
+})
+
+chatForm.addEventListener('submit', e => {
   e.preventDefault()
-  if (input.value) {
-    socket.emit('public message', input.value)
-    input.value = ''
-  }
+
+  const msg = e.target.elements.msg.value
+
+  // emit message to server
+  socket.emit('chatMessage', msg)
+  // clear input
+  e.target.elements.msg.value = ''
+  e.target.elements.msg.value.focus()
 })
 
-socket.on('public message', function (msg) {
-  const item = document.createElement('li')
-  item.textContent = msg
-  messages.appendChild(item)
-  window.scrollTo(0, document.body.scrollHeight)
-})
+// output message to dom
+function outputMessage (message) {
+  const div = document.createElement('div')
+  div.classList.add('message')
+  div.innerHTML = `<p class="meta" >${message.username} <span>${message.time}</span ></p>
+      <p class="text">
+        ${message.text}
+      </p>`
+  document.querySelector('.chat-messages').appendChild(div)
+}
