@@ -47,10 +47,17 @@ app.use((req, res, next) => {
 app.use(routes)
 
 io.on('connection', socket => {
-  // 顯示訊息
-  socket.on('chat message', msg => {
-    io.emit('chat message', msg)
-    io.send('chat message', msg)
+  // 歡迎語
+  socket.emit('public message', 'welcome to public chatroom')
+  // 傳送訊息給所有人
+  socket.on('public message', msg => {
+    io.emit('public message', msg)
+  })
+  // 傳送訊息給除了自己以外的人!!
+  socket.broadcast.emit('public message', 'A user has joined the chat')
+  // say goodbye to the other
+  socket.on('disconnect', () => {
+    io.emit('public message', 'a user has left the chat')
   })
 })
 
