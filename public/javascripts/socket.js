@@ -5,6 +5,29 @@ const chatForm = document.getElementById('chat-form')
 const chatMessages = document.querySelector('.chat-messages')
 const userList = document.getElementById('users')
 
+const privateMessage = document.querySelector('.private-messages')
+const messagelist = document.getElementById('messages')
+
+// 要改成room, 才能傳訊息到特定人
+socket.on('message', message => {
+  outputMessage(message)
+
+  // scroll down
+  privateMessage.scrollTop = privateMessage.scrollHeight
+})
+
+socket.on('system message', message => {
+  outputSystemMessage(message)
+
+  // scroll down
+  privateMessage.scrollTop = privateMessage.scrollHeight
+})
+
+// messagelist from server
+socket.on('existedMsg', user =>
+  outputPrivateMsgInfo(user)
+)
+
 // message from server
 socket.on('message', message => {
   outputMessage(message)
@@ -58,4 +81,9 @@ function outputSystemMessage (message) {
 // add users to DOM
 function outputUsers (users) {
   userList.innerHTML = ` ${users.map(user => `<li class = "d-flex"> <img src=${user.avatar} alt="" class="chat-avatar">${user.username} @${user.account} </li>`).join('')}`
+}
+
+// Msg info
+function outputPrivateMsgInfo (message) {
+  messagelist.innerHTML = ` ${message.map(user => `<li class = "d-flex"> <img src=${message.avatar} alt="" class="chat-avatar">${message.username} @${message.account} </li>`).join('')}`
 }
