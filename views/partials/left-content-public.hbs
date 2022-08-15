@@ -1,7 +1,6 @@
-<!-- left-content-home -->
-<nav id="left-sidebar"
-  style="display:flex; align-items:stretch; width: 30%; margin: 0 3% 0 0; border: 2px solid black; margin-bottom: 0px;">
-  <ul class="list-unstyled" style="position:fixed; width: 14%; ">
+<!-- left-content-profile -->
+<nav id="left-sidebar" style="display:flex; align-items:stretch; width: 30%; height: 630px; margin: 0 3% 0 0;">
+  <ul class="list-unstyled" style="position:fixed; width: 14%;">
     <img class="mt-2 mb-3" src="/images/orangeACLogo.png" alt="AC icon"
       style="height: 40px; width: 40px; border-radius: 0px;">
     <li style="margin-bottom: 20%;">
@@ -22,9 +21,17 @@
     </li>
     <li style="margin-bottom: 20%;">
       <h6>
+        <a href="/chatroom/private" style="text-decoration: none; color: inherit;">
+          <img src="/images/envelope.png" alt="" style="height:24px; width:24px; margin-right:3%;">
+          <span>私人訊息</span>
+        </a>
+      </h6>
+    </li>
+    <li style="margin-bottom: 20%;">
+      <h6>
         <a href="/users/{{user.id}}/tweets" style="text-decoration: none; color: inherit;">
           <img src="/images/blackProfile.png" alt="" style="height:24px; width:24px; margin-right:3%;">
-          個人資料
+          <span>個人資料</span>
         </a>
       </h6>
     </li>
@@ -36,7 +43,7 @@
         </a>
       </h6>
     </li>
-    <li style="margin-bottom: 303px;">
+    <li style="margin-bottom: 297px;">
       <h6>
         <a href="/tweets/modal" class="btn tweet-button" data-bs-toggle="modal" data-bs-target="#myModal"
           style="width: 180px; font-weight: 400; font-size: 20px;">

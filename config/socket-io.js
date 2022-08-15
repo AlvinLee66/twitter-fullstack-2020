@@ -1,7 +1,7 @@
 
 module.exports = io => {
   const userlist = []
-  const formatMessage = require('../utils/messages.js')
+  const formatMessage = require('../util/messages.js')
   io.on('connection', socket => {
     const user = socket.request.user
 

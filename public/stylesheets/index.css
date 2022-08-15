@@ -7,9 +7,11 @@ a:hover {
   color: rgb(83, 81, 81);
 }
 
-html,
 body {
-  font-family: 'Noto Sans TC', 'Montserrat';
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  background: var(--light-color);
+  margin: 20px;
 }
 
 
@@ -70,7 +72,7 @@ body {
   bottom: 16px;
   right: 25px;
   color: #FFFFFF;
-  background: #FF6600;
+  background: var(--dark-color-a);
   width: 80px;
   height: 40px;
   border: none;
@@ -146,7 +148,7 @@ textarea {
   width: 80px;
   height: 40px;
   color: #FFFFFF;
-  background: #FF6600;
+  background: var(--dark-color-a);
   border-radius: 50px;
 }
 
@@ -189,7 +191,7 @@ textarea {
 }
 
 .reply-author {
-  color: #FF6600;
+  color: var(--dark-color-a);
 }
 
 .created-time {
@@ -228,37 +230,16 @@ textarea {
 
 /* chatroom */
 :root {
-  --dark-color-a: #667aff;
-  --dark-color-b: #7386ff;
-  --light-color: #e6e9ff;
+  --dark-color-a: #FF6600;
+  --dark-color-b: #f2833a;
+  --light-color: #fff5eb;
   --success-color: #5cb85c;
   --error-color: #d9534f;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  background: var(--light-color);
-  margin: 20px;
-}
-
-ul {
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-.btn {
+.send {
   cursor: pointer;
-  padding: 5px 15px;
+  /* padding: 5px 15px; */
   background: var(--light-color);
   color: var(--dark-color-a);
   border: 0;
@@ -266,7 +247,6 @@ a {
 }
 
 /* Chat Page */
-
 .chat-container {
   max-width: 1100px;
   background: #fff;
@@ -308,7 +288,7 @@ a {
   margin-bottom: 15px;
 }
 
-.chat-sidebar ul li {
+.chat-sidebar ul {
   padding: 10px 0;
 }
 
@@ -316,6 +296,13 @@ a {
   padding: 30px;
   max-height: 500px;
   overflow-y: scroll;
+}
+
+.chat-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 
 .chat-messages .message {
@@ -353,58 +340,6 @@ a {
   flex: 1;
 }
 
-/* Join Page */
-.join-container {
-  max-width: 500px;
-  margin: 80px auto;
-  color: #fff;
-}
-
-.join-header {
-  text-align: center;
-  padding: 20px;
-  background: var(--dark-color-a);
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-.join-main {
-  padding: 30px 40px;
-  background: var(--dark-color-b);
-}
-
-.join-main p {
-  margin-bottom: 20px;
-}
-
-.join-main .form-control {
-  margin-bottom: 20px;
-}
-
-.join-main label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.join-main input[type='text'] {
-  font-size: 16px;
-  padding: 5px;
-  height: 40px;
-  width: 100%;
-}
-
-.join-main select {
-  font-size: 16px;
-  padding: 5px;
-  height: 40px;
-  width: 100%;
-}
-
-.join-main .btn {
-  margin-top: 20px;
-  width: 100%;
-}
-
 .system-message {
   color: black;
   background-color: rgb(207, 207, 207);
@@ -413,6 +348,7 @@ a {
   padding: 2px;
   margin-top: 5px;
   margin-bottom: 5px;
+  text-align: center;
 }
 
 @media (max-width: 700px) {

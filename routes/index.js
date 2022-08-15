@@ -52,6 +52,7 @@ router.delete('/followships/:id', authenticated, followshipController.removeFoll
 
 // chatroom
 router.get('/chatroom/public', authenticated, chatController.getPublicChatroom)
+router.get('/chatroom/private', authenticated, chatController.getPrivateChatroom)
 
 router.use('/', (req, res) => res.redirect('/tweets'))
 router.use('/', generalErrorHandler)

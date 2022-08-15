@@ -11,6 +11,9 @@ const chatController = {
       .then(currentUser => {
         res.render('chatroom-public', { currentUser })
       })
+  },
+  getPrivateChatroom: (req, res, next) => {
+    res.render('chatroom-private')
   }
 
 }

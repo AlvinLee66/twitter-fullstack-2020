@@ -41,7 +41,7 @@ chatForm.addEventListener('submit', e => {
 function outputMessage (message) {
   const div = document.createElement('div')
   div.classList.add('message')
-  div.innerHTML = `<p class="meta" >${message.username} <span>${message.time}</span ></p>
+  div.innerHTML = `<p class="meta" >${message.username}<span>${message.time}</span ></p>
       <p class="text">
         ${message.text}
       </p>`
@@ -57,5 +57,5 @@ function outputSystemMessage (message) {
 
 // add users to DOM
 function outputUsers (users) {
-  userList.innerHTML = ` ${users.map(user => `<li>${user.username}<small>@${user.account}</small></li>`).join('')}`
+  userList.innerHTML = ` ${users.map(user => `<li class = "d-flex"> <img src=${user.avatar} alt="" class="chat-avatar">${user.username} @${user.account} </li>`).join('')}`
 }
