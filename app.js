@@ -11,7 +11,6 @@ const helpers = require('./_helpers')
 const handlebarsHelpers = require('./helpers/handlebars-helpers')
 const routes = require('./routes')
 const path = require('path')
-const formatMessage = require('./utils/messages.js')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -63,43 +62,7 @@ io.use((socket, next) => {
   }
 })
 
-const userlist = []
-
-io.on('connection', socket => {
-  const user = socket.request.user
-
-  const index = userlist.findIndex(u => u.userId === user.id)
-
-  if (index === -1) {
-    userlist.push({
-      socketId: socket.id,
-      userId: user.id,
-      username: user.name,
-      account: user.account,
-      avatar: user.avatar
-    })
-  }
-  console.log(userlist)
-  io.emit('onlineUsers', userlist)
-
-  console.log(userlist)
-
-  // welcome
-  socket.emit('message', formatMessage('system', 'welcome to public chatroom'))
-
-  // broadcast when a user connects
-  socket.broadcast.emit('message', formatMessage('system', 'A user has joined the chat'))
-
-  // runs when client disconnects
-  socket.on('disconnect', () => {
-    io.emit('message', formatMessage('system', 'A user has left the chat'))
-  })
-
-  // listen for chatMessage
-  socket.on('chatMessage', msg => {
-    io.emit('message', formatMessage('USER', msg))
-  })
-})
+require('./config/socket-io')(io)
 
 server.listen(port, () => console.log(`Example app listening on port ${port}!`))
 

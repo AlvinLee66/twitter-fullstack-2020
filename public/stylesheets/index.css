@@ -405,6 +405,16 @@ a {
   width: 100%;
 }
 
+.system-message {
+  color: black;
+  background-color: rgb(207, 207, 207);
+  border-radius: 10px;
+  height: 25px;
+  padding: 2px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 @media (max-width: 700px) {
   .chat-main {
     display: block;
