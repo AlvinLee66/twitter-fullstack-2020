@@ -1,6 +1,6 @@
-const { User, Tweet } = require('../models')
+const { User, Tweet } = require('../../models')
 const sequelize = require('sequelize')
-const { getOffsetAdminTweets, getPaginationAdminTweets, getOffsetAdminUsers, getPaginationAAdminUsers } = require('../helpers/pagination-helpers')
+const { getOffsetAdminTweets, getPaginationAdminTweets, getOffsetAdminUsers, getPaginationAAdminUsers } = require('../../helpers/pagination-helpers')
 
 const adminController = {
   signInPage: (req, res) => {

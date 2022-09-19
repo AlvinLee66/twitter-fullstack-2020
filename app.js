@@ -9,7 +9,7 @@ const passport = require('./config/passport')
 const methodOverride = require('method-override')
 const helpers = require('./_helpers')
 const handlebarsHelpers = require('./helpers/handlebars-helpers')
-const routes = require('./routes')
+const { pages } = require('./routes')
 const path = require('path')
 
 const app = express()
@@ -39,7 +39,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(routes)
+app.use(pages)
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 module.exports = app

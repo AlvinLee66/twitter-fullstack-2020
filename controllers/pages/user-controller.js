@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
-const helpers = require('../_helpers')
-const { User, Tweet, Reply, Like } = require('../models')
+const helpers = require('../../_helpers')
+const { User, Tweet, Reply, Like } = require('../../models')
 const imgur = require('imgur')
 const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID
 imgur.setClientId(IMGUR_CLIENT_ID)

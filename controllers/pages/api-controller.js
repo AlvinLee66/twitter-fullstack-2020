@@ -1,6 +1,6 @@
-const { User } = require('../models')
-const helpers = require('../_helpers')
-const { imgurFileHandler } = require('../helpers/file-helpers')
+const { User } = require('../../models')
+const helpers = require('../../_helpers')
+const { imgurFileHandler } = require('../../helpers/file-helpers')
 
 const apiController = {
   editUser: (req, res, next) => {

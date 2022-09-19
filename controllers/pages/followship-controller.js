@@ -1,5 +1,5 @@
-const { Followship } = require('../models')
-const helpers = require('../_helpers')
+const { Followship } = require('../../models')
+const helpers = require('../../_helpers')
 const followshipController = {
   addFollowing: async (req, res, next) => {
     try {
