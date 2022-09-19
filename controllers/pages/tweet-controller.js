@@ -7,9 +7,6 @@ const tweetController = {
     tweetServices.getTweets(req, (err, data) => err ? next(err) : res.render('tweets', data))
   },
   postTweet: (req, res, next) => {
-    const userId = helpers.getUser(req).id
-    const description = req.body.description
-
     if (!req.body.description) {
       return res.redirect('/')
     }
@@ -18,15 +15,12 @@ const tweetController = {
       return res.redirect('/')
     }
 
-    return Tweet.create({
-      userId,
-      description
+    tweetServices.postTweet(req, (err, data) => {
+      if (err) return next(err)
+      req.flash('success_messages', '成功發布推文')
+      req.session.createdData = data
+      return res.redirect('/tweets')
     })
-      .then(() => {
-        req.flash('success_messages', '成功發布推文')
-        res.redirect('/tweets')
-      })
-      .catch(err => next(err))
   },
   getTweet: (req, res, next) => {
     const currentUser = helpers.getUser(req)

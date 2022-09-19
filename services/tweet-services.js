@@ -36,7 +36,17 @@ const tweetController = {
         return cb(null, { tweets: data, user, recommendFollow, currentUser })
       })
       .catch(err => cb(err))
+  },
+  postTweet: (req, cb) => {
+    const userId = helpers.getUser(req).id
+    const description = req.body.description
+
+    return Tweet.create({
+      userId,
+      description
+    })
+      .then(newTweet => cb(null, { tweet: newTweet }))
+      // .catch(err => cb(err))
   }
 }
-
 module.exports = tweetController
