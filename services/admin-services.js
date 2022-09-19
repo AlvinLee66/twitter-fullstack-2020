@@ -30,6 +30,16 @@ const adminController = {
         })
       })
       .catch(err => cb(err))
+  },
+  deleteTweet: (req, cb) => {
+    const { id } = req.params
+    return Tweet.findByPk(id)
+      .then(tweet => {
+        if (!tweet) throw new Error('推文不存在!')
+        return tweet.destroy()
+      })
+      .then(deletedTweet => cb(null, { tweet: deletedTweet }))
+      .catch(err => cb(err))
   }
 }
 

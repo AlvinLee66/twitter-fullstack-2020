@@ -1,6 +1,6 @@
-const { User, Tweet } = require('../../models')
+const { User } = require('../../models')
 const sequelize = require('sequelize')
-const { getOffsetAdminTweets, getPaginationAdminTweets, getOffsetAdminUsers, getPaginationAAdminUsers } = require('../../helpers/pagination-helpers')
+const { getOffsetAdminUsers, getPaginationAAdminUsers } = require('../../helpers/pagination-helpers')
 const adminServices = require('../../services/tweet-services')
 
 const adminController = {
@@ -20,14 +20,11 @@ const adminController = {
     adminServices.getTweets(req, (err, data) => err ? next(err) : res.render('admin/tweets', data))
   },
   deleteTweet: (req, res, next) => {
-    const { id } = req.params
-    return Tweet.findByPk(id)
-      .then(tweet => {
-        if (!tweet) throw new Error('推文不存在!')
-        return tweet.destroy()
-      })
-      .then(deletedTweet => res.redirect('/admin/tweets'))
-      .catch(next)
+    adminServices.deleteRestaurant(req, (err, data) => {
+      if (err) return next(err)
+      req.session.deletedData = data
+      return res.redirect('/admin/tweets')
+    })
   },
   getUsers: (req, res, next) => {
     const DEFAULT_LIMIT = 10

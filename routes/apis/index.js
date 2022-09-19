@@ -1,9 +1,13 @@
 const express = require('express')
 const router = express.Router()
+const admin = require('./modules/admin')
+
 const tweetController = require('../../controllers/apis/tweet-controller')
-const adminController = require('../../controllers/apis/admin-controller')
+const { apiErrorHandler } = require('../../middleware/error-handler')
+
+router.use('/admin', admin)
 
 router.get('/tweets', tweetController.getTweets)
-router.get('/admin/tweets', adminController.getTweets)
+router.use('/', apiErrorHandler)
 
 module.exports = router
