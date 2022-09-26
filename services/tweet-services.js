@@ -46,7 +46,106 @@ const tweetController = {
       description
     })
       .then(newTweet => cb(null, { tweet: newTweet }))
-      // .catch(err => cb(err))
+    // .catch(err => cb(err))
+  },
+  getTweet: (req, cb) => {
+    const currentUser = helpers.getUser(req)
+    const tweetId = req.params.id
+    const userId = helpers.getUser(req).id
+    return Promise.all([
+      Tweet.findByPk(tweetId, {
+        order: [['createdAt', 'DESC']],
+        raw: true,
+        nest: true,
+        include: [User, Reply, Like]
+      }),
+      Reply.findAll({
+        order: [['createdAt', 'DESC']],
+        raw: true,
+        nest: true,
+        include: User,
+        where: { tweet_id: tweetId }
+      }),
+      Like.findAll({
+        raw: true,
+        where: { tweet_id: tweetId }
+      }),
+      User.findAll({
+        where: { role: 'user' },
+        include: [{ model: User, as: 'Followers' }],
+        attributes: ['id', 'name', 'account', 'avatar']
+      })
+    ])
+      .then(([tweet, replies, likes, userData]) => {
+        const data = replies.map(r => ({
+          ...r,
+          author: tweet.User.account
+        }))
+
+        const originalDate = tweet.createdAt
+
+        const date = originalDate.getDate()
+        const month = originalDate.getMonth()
+        const year = originalDate.getFullYear()
+        let dayOrNight = '上午'
+        let hour = originalDate.getHours()
+        if (hour > 12) {
+          hour = hour - 12
+          dayOrNight = '下午'
+        }
+        const minutes = originalDate.getMinutes()
+        const createdAt = `${dayOrNight} ${hour}:${minutes}．${year}年${month}月${date}日`
+        tweet.createdAt = createdAt
+
+        const post = {
+          tweet: tweet,
+          isLiked: likes?.some(l => l.UserId === userId)
+        }
+
+        const recommendFollow = userData.map(user => ({
+          ...user.toJSON(),
+          followerCount: user.Followers.length,
+          isFollowed: currentUser.Followings.some(f => f.id === user.id)
+        }))
+          .sort((a, b) => b.followerCount - a.followerCount)
+
+        return cb(null, { tweet: post, replies: data, likes, recommendFollow, currentUser })
+      })
+      .catch(err => cb(err))
+  },
+  postReply: (req, cb) => {
+    const userId = helpers.getUser(req).id
+    const TweetId = req.params.id
+    const comment = req.body.reply
+
+    Reply.create({
+      userId,
+      TweetId,
+      comment
+    })
+      .then(reply => cb(null, { reply }))
+  },
+  likePost: (req, cb) => {
+    const TweetId = req.params.id
+    const UserId = helpers.getUser(req).id
+    Like.create({
+      UserId,
+      TweetId
+    })
+      .then(likedPost => cb(null, { likedPost }))
+  },
+  unlikePost: (req, cb) => {
+    const TweetId = req.params.id
+
+    return Like.findOne({
+      where: {
+        UserId: helpers.getUser(req).id,
+        TweetId
+      }
+    }).then(like => {
+      return like.destroy()
+        .then(dislikePost => cb(null, { dislikePost }))
+    })
   }
 }
 module.exports = tweetController
