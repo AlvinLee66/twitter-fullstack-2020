@@ -1,7 +1,4 @@
-const { User } = require('../../models')
-const sequelize = require('sequelize')
-const { getOffsetAdminUsers, getPaginationAAdminUsers } = require('../../helpers/pagination-helpers')
-const adminServices = require('../../services/tweet-services')
+const adminServices = require('../../services/admin-services')
 
 const adminController = {
   signInPage: (req, res) => {
@@ -20,40 +17,14 @@ const adminController = {
     adminServices.getTweets(req, (err, data) => err ? next(err) : res.render('admin/tweets', data))
   },
   deleteTweet: (req, res, next) => {
-    adminServices.deleteRestaurant(req, (err, data) => {
+    adminServices.deleteTweet(req, (err, data) => {
       if (err) return next(err)
       req.session.deletedData = data
       return res.redirect('/admin/tweets')
     })
   },
   getUsers: (req, res, next) => {
-    const DEFAULT_LIMIT = 10
-    const page = Number(req.query.page) || 1
-    const limit = Number(req.query.limit) || DEFAULT_LIMIT
-    const offset = getOffsetAdminUsers(limit, page)
-    return User.findAll({
-      where: { role: 'user' },
-      attributes: ['name', 'account', 'avatar', 'banner',
-        [sequelize.literal('(SELECT COUNT(*) from Tweets WHERE Tweets.user_id = User.id)'), 'tweetsCount'],
-        [sequelize.literal('(SELECT COUNT(*) from Likes WHERE Likes.user_id = User.id)'), 'likesCount'],
-        [sequelize.literal('(SELECT COUNT(*) from Followships WHERE Followships.following_id = User.id)'), 'followingsCount'],
-        [sequelize.literal('(SELECT COUNT(*) from Followships WHERE Followships.follower_id = User.id)'), 'followersCount']
-      ],
-      order: [
-        [sequelize.literal('tweetsCount'), 'DESC']
-      ],
-      limit,
-      offset,
-      raw: true,
-      nest: true
-    })
-      .then(users => {
-        return res.render('admin/users', {
-          users,
-          pagination: getPaginationAAdminUsers(limit, page, users.count)
-        })
-      })
-      .catch(next)
+    adminServices.getUsers(req, (err, data) => err ? next(err) : res.render('admin/users', data))
   }
 }
 
