@@ -7,6 +7,7 @@ const upload = require('../../middleware/multer')
 
 const tweetController = require('../../controllers/apis/tweet-controller')
 const userController = require('../../controllers/apis/user-controller')
+const followshipController = require('../../controllers/apis/followship-controller')
 const { apiErrorHandler } = require('../../middleware/error-handler')
 
 router.use('/admin', authenticated, authenticatedAdmin, admin)
@@ -34,6 +35,10 @@ router.get('/users/:id/followings', authenticated, userController.followings)
 router.get('/users/:id/setting', authenticated, userController.getSetting)
 router.put('/users/:id/setting', authenticated, userController.putSetting)
 router.post('/users/:id/edit', authenticated, upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'banner', maxCount: 1 }]), userController.editUser)
+
+// followship
+router.post('/followships', authenticated, followshipController.addFollowing)
+router.delete('/followships/:id', authenticated, followshipController.removeFollowing)
 
 router.use('/', apiErrorHandler)
 
