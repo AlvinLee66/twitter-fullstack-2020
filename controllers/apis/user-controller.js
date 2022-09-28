@@ -18,6 +18,9 @@ const userController = {
       next(err)
     }
   },
+  signUp: (req, res, next) => {
+    userServices.signUp(req, (err, data) => err ? next(err) : res.json(data))
+  },
   getUserTweets: (req, res, next) => {
     userServices.getUserTweets(req, (err, data) => err ? next(err) : res.json(data))
   },
@@ -26,6 +29,15 @@ const userController = {
   },
   getUserLikes: (req, res, next) => {
     userServices.getUserLikes(req, (err, data) => err ? next(err) : res.json(data))
+  },
+  getSetting: (req, res, next) => {
+    userServices.getSetting(req, (err, data) => err ? next(err) : res.json(data))
+  },
+  putSetting: (req, res, next) => {
+    userServices.putSetting(req, (err, data) => err ? next(err) : res.json(data))
+  },
+  editUser: (req, res, next) => {
+    userServices.editUser(req, (err, data) => err ? next(err) : res.json(data))
   },
   followers: (req, res, next) => {
     userServices.followers(req, (err, data) => err ? next(err) : res.json(data))
